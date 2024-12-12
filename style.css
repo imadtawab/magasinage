@@ -5,7 +5,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 body {
-    margin-top: 50px;
+    /* margin-top: 50px; */
     color: #424242;
 }
 h1 {
@@ -77,6 +77,10 @@ main {
     justify-content: center;
     border-top: 2px solid #eee;
     padding-top: 40px;
+    @media (max-width: 500px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 }
 .output .box {
     text-align: center;
