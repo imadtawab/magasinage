@@ -33,7 +33,7 @@ form.onsubmit = (e) => {
         let exitDateValue = new Date(new Date(exitDate.value).setHours(0,0,0,0))
     
         const diffInMilliseconds = exitDateValue - depotDateValue;
-        if(diffInMilliseconds < 0) return alert("Warning: La date de dépotage doit être inférieure à la date de sortie.")
+        if(diffInMilliseconds < 0) return alert("⚠Warning: La date de dépotage doit être inférieure à la date de sortie.")
     
         const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24)) + 1
         // console.log(diffInDays)
@@ -52,10 +52,10 @@ form.onsubmit = (e) => {
             let nbrOfDaysFrankness = -nbrOfDays + 1
             // console.log(exitDateValue - today);
             if(exitDateValue - today === 0) {
-                return output.innerHTML = nbrOfDaysFrankness === 1 ? "<h2 style='color: #df2626'>C'est le dernier jour de la franchise</h2>" : `<h2>Tu as déjà une franchise de ${nbrOfDaysFrankness}jrs jusqu'au ${exitDateFrankness}</h2>`
+                return output.innerHTML = nbrOfDaysFrankness === 1 ? "<h2 style='color: #df2626'>C'est le dernier jour de la franchise 😬.</h2>" : `<h2>Tu as déjà une franchise de <span>${nbrOfDaysFrankness} jrs</span> jusqu'au <span>${exitDateFrankness}</span>.</h2>`
             } else {
                 // console.log(exitDateValue, formatDate(new Date(exitDateValue)))
-                return output.innerHTML = nbrOfDaysFrankness - 1 === 0 ? `<h2>Le ${formatDate(new Date(exitDateValue))}, C'est le dernier jour de la franchise.</h2>` : `<h2>Le ${formatDate(new Date(exitDateValue))}, il te restera encore une franchise de ${nbrOfDaysFrankness}jrs jusqu'au ${exitDateFrankness}</h2>.`
+                return output.innerHTML = nbrOfDaysFrankness - 1 === 0 ? `<h2>Le <span class="exit-date">${formatDate(new Date(exitDateValue))}</span>, C'est le dernier jour de la franchise.</h2>` : `<h2>Le <span class="exit-date">${formatDate(new Date(exitDateValue))}</span>, il te restera encore une franchise de <span>${nbrOfDaysFrankness} jrs</span> jusqu'au <span>${exitDateFrankness}</span>.</h2>`
             }
         } else {
             let lwstrOutput = `<div class="box">
