@@ -1,5 +1,6 @@
 let weight = document.getElementById("weight")
-let ata = document.getElementById("ata")
+let depotDate = document.getElementById("depotDate")
+let exitDate = document.getElementById("exitDate")
 let frankness = document.getElementById("frankness")
 let resetBtn = document.getElementById("reset")
 let calculate = document.getElementById("calculate")
@@ -9,18 +10,30 @@ let vtd = document.getElementById("vtd")
 // <!-- LWSTR: 50 * t * j -->
 // <!-- DDSTOR: VTD * 0.2% * j -->
 
+// Change the default value for the exist date
+exitDate.defaultValue = formatDate(new Date(), true)
+
+function formatDate(date, forChangeValue = false) {
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Months are 0-indexed
+    const year = date.getFullYear();
+    
+    return forChangeValue ? `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}` : `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+    // return `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+}
 form.onsubmit = (e) => {
     e.preventDefault();
-        // Handle Nbr of ton
+        output.innerHTML = ""
+            // Handle Nbr of ton
         let nbrOfTon = Math.ceil(weight.value / 1000)
 
         // Handle Nbr of days
-        let today = new Date()
-        let ataValue = new Date(ata.value)
-    console.log(+vtd.value)
+        let today = new Date(new Date().setHours(0,0,0,0))
+        let depotDateValue = new Date(new Date(depotDate.value).setHours(0,0,0,0))
+        let exitDateValue = new Date(new Date(exitDate.value).setHours(0,0,0,0))
     
-        const diffInMilliseconds = today - ataValue;
-        if(diffInMilliseconds < 0) return alert("Please select a good day")
+        const diffInMilliseconds = exitDateValue - depotDateValue;
+        if(diffInMilliseconds < 0) return alert("Warning: La date de dépotage doit être inférieure à la date de sortie.")
     
         const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24)) + 1
         // console.log(diffInDays)
@@ -28,22 +41,22 @@ form.onsubmit = (e) => {
         const nbrOfDays = diffInDays - +frankness.value
     
         const lwstr =  50 * nbrOfTon * nbrOfDays
+    console.log(lwstr)
     
         if(lwstr <= 0) {
-            let franknessDate = new Date().setDate(today.getDate() + -nbrOfDays);
+            let franknessDate = new Date(exitDateValue).setDate(exitDateValue.getDate() + -nbrOfDays);
     
-            const date = new Date(franknessDate); // Convert to Date object
-            
-            // Extract day, month, and year
-            const day = date.getDate();
-            const month = date.getMonth() + 1; // Months are 0-indexed
-            const year = date.getFullYear();
-            
             // Format as dd/mm/yyyy
-            const formattedDate = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
-            console.log(formattedDate)
-            // --- ${-nbrOfDays + 1} jrs
-            return output.innerHTML = `<h2>Tu a déjà un franchise jusqu'a le ${formattedDate}</h2>`
+            const exitDateFrankness = formatDate(new Date(franknessDate));
+
+            let nbrOfDaysFrankness = -nbrOfDays + 1
+            // console.log(exitDateValue - today);
+            if(exitDateValue - today === 0) {
+                return output.innerHTML = nbrOfDaysFrankness === 1 ? "<h2 style='color: #df2626'>C'est le dernier jour de la franchise</h2>" : `<h2>Tu as déjà une franchise de ${nbrOfDaysFrankness}jrs jusqu'au ${exitDateFrankness}</h2>`
+            } else {
+                // console.log(exitDateValue, formatDate(new Date(exitDateValue)))
+                return output.innerHTML = nbrOfDaysFrankness - 1 === 0 ? `<h2>Le ${formatDate(new Date(exitDateValue))}, C'est le dernier jour de la franchise.</h2>` : `<h2>Le ${formatDate(new Date(exitDateValue))}, il te restera encore une franchise de ${nbrOfDaysFrankness}jrs jusqu'au ${exitDateFrankness}</h2>.`
+            }
         } else {
             let lwstrOutput = `<div class="box">
                                             <h3>LWSTR</h3>

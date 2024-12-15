@@ -22,14 +22,21 @@
              </div>
              <div class="container">
                 <div class="box">
-                     <label for="ata">Date de dépotage:</label>
-                     <input required type="date" id="ata">
-                 </div>
-                 <div class="box">
-                     <label for="frankness">Franchise:</label>
-                     <input required type="number" id="frankness" value="7">
-                 </div>
-             </div>
+                    <label for="depotDate">Date de dépotage:</label>
+                    <input placeholder="Select ..." required type="date" id="depotDate">
+                </div>
+                <div class="box">
+                    <label for="exitDate">Date de sortie:</label>
+                    <input placeholder="Select ..." required type="date" id="exitDate">
+                </div>
+            </div>
+            <div class="container">
+                <div class="box">
+                    <label for="frankness">Franchise:</label>
+                    <input required type="number" id="frankness" value="7">
+                </div>
+                <div  class="box"></div>
+            </div>
              <div class="footer">
                 <button type="reset" id="reset">Reset</button>
                 <button type="submit" id="calculate">Calculate</button>

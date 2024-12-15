@@ -73,13 +73,16 @@ main {
 }
 .output {
     display: flex;
+    column-gap: 5px;
     margin-top: 40px;
     justify-content: center;
     border-top: 2px solid #eee;
     padding-top: 40px;
-    @media (max-width: 500px) {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+    &:has(.box) {
+        @media (max-width: 500px) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
     }
 }
 .output .box {
@@ -100,4 +103,7 @@ main {
     display: block;
     font-weight: 100;
     margin-top: 5px;
+}
+.output h2 {
+    text-align: center;
 }
