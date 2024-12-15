@@ -1,4 +1,117 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 body {
-    background-color: red;
-    opacity: .9;
+    /* margin-top: 50px; */
+    color: #424242;
+}
+h1 {
+    text-align: center;
+    padding: 30px 0;
+
+}
+main {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+.container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.box {
+    flex: 1;
+}
+.box label {
+    display: block;
+    padding-bottom: 10px;
+}
+.box input {
+    width: 100%;
+    background: #fcfcfc;
+    border: 1px solid #e3e2e2;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    padding: 10px 15px;
+    min-width: 150px;
+    &:focus {
+        border-color: #458fff;
+    box-shadow: 0 0 0 3px rgba(69, 143, 255, .729);
+    }
+}
+.footer {
+    text-align: end;
+    margin-top: 20px;
+}
+.footer button {
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px 18px;
+    transition: all .3s;
+    cursor: pointer;
+    &#reset {
+        background-color: #df2626;
+    }
+    &#calculate {
+        background-color: #29a5a7;
+    }
+    &:hover {
+        opacity: .8;
+    }
+    &:active {
+        transform: scale(.9);
+    }
+}
+.output {
+    display: flex;
+    column-gap: 5px;
+    margin-top: 40px;
+    justify-content: center;
+    border-top: 2px solid #eee;
+    padding-top: 40px;
+    &:has(.box) {
+        @media (max-width: 500px) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+.output .box {
+    text-align: center;
+}
+.output .box h3 {
+    color: #29a5a7;
+    font-size: 18px;
+}
+.output .box .value {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.output .box .value span {
+    font-size: 16px;
+    display: block;
+    font-weight: 100;
+    margin-top: 5px;
+}
+.output h2 {
+    text-align: center;
+    font-size: 21px;
+    line-height: 1.5;
+    span {
+        color: #29a5a7;
+        &.exit-date {
+            color: #df2626;
+        }
+    }
 }
