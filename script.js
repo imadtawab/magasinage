@@ -77,4 +77,5 @@ form.onsubmit = (e) => {
 }
 resetBtn.onclick = () => {
         output.innerHTML = ""
+        exitDate.defaultValue = formatDate(new Date(), true)
 }
