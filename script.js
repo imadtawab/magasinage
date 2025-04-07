@@ -35,7 +35,7 @@ form.onsubmit = (e) => {
         const diffInMilliseconds = exitDateValue - depotDateValue;
         if(diffInMilliseconds < 0) return alert("⚠Warning: La date de dépotage doit être inférieure à la date de sortie.")
     
-        const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24)) + 1
+        const diffInDays = Math.round(diffInMilliseconds / (1000 * 60 * 60 * 24)) + 1
         // console.log(diffInDays)
         
         const nbrOfDays = diffInDays - +frankness.value
